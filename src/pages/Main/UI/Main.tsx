@@ -7,6 +7,9 @@ const Main = () => {
     return (
         <div className={cls.Main}>
            <Navbar/>
+           <div className={cls.content}>
+
+           </div>
         </div>
     );
 };
