@@ -1,0 +1,17 @@
+.wrapper {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: rgba(255 255 255 / 40%);
+  }
+
+  &:focus {
+    background: rgba(255 255 255 / 60%);
+  }
+}
+
+.icon {
+  margin: 0 10px;
+}

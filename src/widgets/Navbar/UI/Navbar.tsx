@@ -7,10 +7,10 @@ const Navbar = () => {
 
     return (
         <menu className={cls.Navbar}>
-           <img alt="#" className={cls.image} src={Tile}/>
-           <img alt="#" className={cls.image} src={Arrow}/>
-           <button className={cls.active}>Просмотр</button>
-           <button className={cls.text}>Управление</button>
+            <img alt="#" className={cls.image} src={Tile}/>
+            <img alt="#" className={cls.image} src={Arrow}/>
+            <button className={cls.active}>Просмотр</button>
+            <button className={cls.text}>Управление</button>
         </menu>
     );
 };
