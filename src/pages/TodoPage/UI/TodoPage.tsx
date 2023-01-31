@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from './TodoPage.module.scss'
-import {AddNewTodo} from 'features/AddNewTodo';
-import {TodoList} from 'entities/Todo';
+import {AddNewRow} from 'features/AddNewRow';
+import {RowsList} from 'entities/Todo';
 import axios from "axios";
 
 const baseURL = 'http://185.244.172.108:8081/v1/outlay-rows/entity'
@@ -13,13 +13,11 @@ const TodoPage = () => {
 
     async function createEntity() {
         const eInfo = await axios.post(`${baseURL}/create`)
-
         if (eInfo.data.id) setEntityId(String(eInfo.data.id))
     }
 
     async function getTreeRows(eID: string) {
         const rowInfo = await axios.get(`${baseURL}/${eID}/row/list`)
-        console.log(rowInfo)
         if (rowInfo) setRows(rowInfo)
     }
 
@@ -41,6 +39,7 @@ const TodoPage = () => {
                 <p className={cls.title}>Строительно-монтажные работы</p>
             </div>
             <table className={cls.tableWrapper}>
+                <tbody>
                 <tr className={cls.table}>
                     <td className={cls.column}>Уровень</td>
                     <td className={cls.column}>Наименование работ</td>
@@ -49,9 +48,10 @@ const TodoPage = () => {
                     <td className={cls.column}>Накладные расходы</td>
                     <td className={cls.column}>Сметная прибыль</td>
                 </tr>
-                <TodoList todoList={rows}/>
+                </tbody>
             </table>
-            <AddNewTodo
+            <RowsList rowsList={rows}/>
+            <AddNewRow
                 createRowInEntity={() => createRowInEntity(entityId, rows)}
             />
         </div>

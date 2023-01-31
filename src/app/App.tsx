@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/index.scss'
 import {Main} from "pages/Main";
 
-const App = () => {
+export default function App() {
 
     return (
         <div className="app">
@@ -10,5 +10,3 @@ const App = () => {
         </div>
     );
 }
-
-export default App;

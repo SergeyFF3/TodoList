@@ -1,11 +1,11 @@
 import React from 'react';
-import cls from './AddNewTodo.module.scss'
+import cls from './AddNewRow.module.scss'
 
 interface AddNewTodoProps {
     createRowInEntity?: () => void
 }
 
-const AddNewTodo = (props: AddNewTodoProps) => {
+const AddNewRow = (props: AddNewTodoProps) => {
 
     const {
         createRowInEntity
@@ -39,6 +39,7 @@ const AddNewTodo = (props: AddNewTodoProps) => {
     return (
         <form>
             <table className={cls.wrapper}>
+                <tbody>
                 <tr className={cls.table}>
                     <td className={cls.column}>
                         <button onClick={createRowInEntity}>send</button>
@@ -50,7 +51,7 @@ const AddNewTodo = (props: AddNewTodoProps) => {
                             type='text'
                             value={rowName}
                             onChange={onChangeRowName}
-                            // onKeyPress={createRowInEntity}
+                            onKeyPress={createRowInEntity}
                         />
                     </td>
                     <td className={cls.column}>
@@ -94,9 +95,10 @@ const AddNewTodo = (props: AddNewTodoProps) => {
                         />
                     </td>
                 </tr>
+                </tbody>
             </table>
         </form>
     );
 };
 
-export default React.memo(AddNewTodo);
+export default React.memo(AddNewRow);

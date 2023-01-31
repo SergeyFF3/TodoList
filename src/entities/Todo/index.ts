@@ -1,4 +1,6 @@
-import Todo from "./UI/TodoCard/Todo";
-import TodoList from "./UI/TodoList/TodoList";
+import RowItem from "./UI/RowItem/RowItem";
+import RowsList from "./UI/RowList/RowsList";
 
-export { Todo, TodoList }
+export { RowItem, RowsList }
+
+export type { TodoProps } from './model/types/todo'

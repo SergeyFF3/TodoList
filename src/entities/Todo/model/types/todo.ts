@@ -1,4 +1,4 @@
-export interface ITodo {
+export interface TodoProps {
     child?: [ null ],
     equipmentCosts?: number
     estimatedProfit?: number
