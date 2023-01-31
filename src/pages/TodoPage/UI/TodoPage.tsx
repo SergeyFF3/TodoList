@@ -1,37 +1,56 @@
 import React from 'react';
 import cls from './TodoPage.module.scss'
 import {AddNewRow} from 'features/AddNewRow';
-import {RowsList} from 'entities/Todo';
+import {getRowsData, RowsList} from 'entities/Todo';
 import axios from "axios";
+import {useAppDispatch} from "../../../app/storeProvider/store";
+import {createEntity} from "../model/services/createEntity";
+import {useSelector} from "react-redux";
+import {getEntityId} from "../model/selectors/getEntityID";
+import {getTreeRows} from "../../../entities/Todo/model/services/getTreeRows";
 
-const baseURL = 'http://185.244.172.108:8081/v1/outlay-rows/entity'
+export const baseURL = 'http://185.244.172.108:8081/v1/outlay-rows/entity'
 
 const TodoPage = () => {
 
-    const [entityId, setEntityId] = React.useState<string>('')
-    const [rows, setRows] = React.useState<any>([])
+    // const [entityId, setEntityId] = React.useState<string>('')
+    // const [rows, setRows] = React.useState<any>([])
+    //
+    // async function createEntity() {
+    //     const eInfo = await axios.post(`${baseURL}/create`)
+    //     if (eInfo.data.id) setEntityId(String(eInfo.data.id))
+    // }
+    //
+    // async function getTreeRows(eID: string) {
+    //     const rowInfo = await axios.get(`${baseURL}/${eID}/row/list`)
+    //     if (rowInfo) setRows(rowInfo)
+    // }
+    //
+    // const createRowInEntity = React.useCallback((eID: string, rowValues: any) => {
+    //     return axios.post(`${baseURL}/${eID}/row/create`, rowValues)
+    // }, [])
+    //
+    // React.useEffect(() => {
+    //     createEntity()
+    // }, [])
+    //
+    // React.useEffect(() => {
+    //     if (entityId) getTreeRows(entityId)
+    // }, [entityId])
 
-    async function createEntity() {
-        const eInfo = await axios.post(`${baseURL}/create`)
-        if (eInfo.data.id) setEntityId(String(eInfo.data.id))
-    }
+    const dispatch = useAppDispatch()
 
-    async function getTreeRows(eID: string) {
-        const rowInfo = await axios.get(`${baseURL}/${eID}/row/list`)
-        if (rowInfo) setRows(rowInfo)
-    }
+    const eID = useSelector(getEntityId)
 
-    const createRowInEntity = React.useCallback((eID: string, rowValues: any) => {
-        return axios.post(`${baseURL}/${eID}/row/create`, rowValues)
-    }, [])
+    const rowsData = useSelector(getRowsData)
 
     React.useEffect(() => {
-        createEntity()
-    }, [])
+        dispatch(createEntity())
+    }, [dispatch])
 
     React.useEffect(() => {
-        if (entityId) getTreeRows(entityId)
-    }, [entityId])
+        if (eID) dispatch(getTreeRows(eID))
+    }, [dispatch, eID])
 
     return (
         <div className={cls.wrapper}>
@@ -50,9 +69,9 @@ const TodoPage = () => {
                 </tr>
                 </tbody>
             </table>
-            <RowsList rowsList={rows}/>
+            {/*<RowsList rowsList={rows}/>*/}
             <AddNewRow
-                createRowInEntity={() => createRowInEntity(entityId, rows)}
+                // createRowInEntity={() => createRowInEntity(entityId, rows)}
             />
         </div>
     );

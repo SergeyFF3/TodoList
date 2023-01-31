@@ -3,4 +3,6 @@ import RowsList from "./UI/RowList/RowsList";
 
 export { RowItem, RowsList }
 
-export type { TodoProps } from './model/types/todo'
+export type { TodoProps, TodoSchema } from './model/types/todo'
+
+export { getRowsData } from './model/selectors/getRowsData'

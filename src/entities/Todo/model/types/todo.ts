@@ -13,3 +13,9 @@ export interface TodoProps {
     supportCosts?: number
     total?: number
 }
+
+export interface TodoSchema {
+    data?: TodoProps[]
+    isLoading?: boolean
+    error?: string
+}
