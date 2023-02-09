@@ -131,6 +131,21 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             onKeyPress={createRowInEntity}
                         />
                     </td>
+
+
+
+
+                    //test
+                    <td className={cls.column}>
+                        <input
+                            className={cls.input}
+                            placeholder="0"
+                            type='number'
+                            value={state?.estimatedProfit}
+                            onChange={onChangeEstimatedProfit}
+                            onKeyPress={createRowInEntity}
+                        />
+                    </td>
                 </tr>
                 </tbody>
             </table>
