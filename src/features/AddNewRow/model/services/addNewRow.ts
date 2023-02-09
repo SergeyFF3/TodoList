@@ -2,20 +2,13 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {baseURL} from "pages/TodoPage/UI/TodoPage";
 import {TodoProps} from "entities/Todo";
+import { NewRowProps } from "../types/addRowData";
 
-export interface NewRowProps {
-    rowName?: string
-    salary?: number
-    equipmentCosts?: number
-    overheads?: number
-    estimatedProfit?: number
-}
-
-export const addNewRow = createAsyncThunk<NewRowProps, string, {rejectValue: string}> (
+export const addNewRow = createAsyncThunk<NewRowProps, { eID: string, test: NewRowProps }, {rejectValue: string}> (
     'newRow/addNewRow',
-    async (eID, ThunkAPI) => {
+    async (data, ThunkAPI) => {
         try {
-            const rowInfo = await axios.post<NewRowProps>(`${baseURL}/${eID}/row/create`)
+            const rowInfo = await axios.post<NewRowProps>(`${baseURL}/${data.eID}/row/create`, data.test)
 
             return rowInfo.data
         } catch (e) {

@@ -1,5 +1,7 @@
 import React from 'react';
 import cls from './AddNewRow.module.scss'
+import {useSelector} from "react-redux";
+import {getNewRowData} from "../model/selectors/getNewRowData";
 
 interface AddNewTodoProps {
     createRowInEntity?: () => void
@@ -11,30 +13,65 @@ const AddNewRow = (props: AddNewTodoProps) => {
         createRowInEntity
     } = props
 
-    const [rowName, setRowName] = React.useState('')
+    const data = useSelector(getNewRowData)
+
+    const [state, setState] = React.useState(data)
+
+    // const [rowName, setRowName] = React.useState('')
+    // const onChangeRowName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setRowName(e.target.value)
+    // }, [])
+
+
     const onChangeRowName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setRowName(e.target.value)
+        setState((prev) => ({...prev, rowName: e.target.value}))
     }, [])
 
-    const [salary, setSalary] = React.useState('0')
+
+    // const [salary, setSalary] = React.useState('0')
+    // const onChangeSalary = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setSalary(e.target.value)
+    // }, [])
+
+
     const onChangeSalary = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setSalary(e.target.value)
+        setState((prev) => ({...prev, salary: Number(e.target.value)}))
     }, [])
 
-    const [equipmentCosts, setEquipmentCosts] = React.useState('0')
+
+    // const [equipmentCosts, setEquipmentCosts] = React.useState('0')
+    // const onChangeEquipmentCosts = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setEquipmentCosts(e.target.value)
+    // }, [])
+
     const onChangeEquipmentCosts = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setEquipmentCosts(e.target.value)
+        setState((prev) => ({...prev, equipmentCosts: Number(e.target.value)}))
     }, [])
 
-    const [overheads, setOverheads] = React.useState('0')
+
+    // const [overheads, setOverheads] = React.useState('0')
+    // const onChangeOverheads = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setOverheads(e.target.value)
+    // }, [])
+
+
     const onChangeOverheads = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setOverheads(e.target.value)
+        setState((prev) => ({...prev, overheads: Number(e.target.value)}))
     }, [])
 
-    const [estimatedProfit, setEstimatedProfit] = React.useState('0')
+
+
+
+    // const [estimatedProfit, setEstimatedProfit] = React.useState('0')
+    // const onChangeEstimatedProfit = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setEstimatedProfit(e.target.value)
+    // }, [])
+
+
     const onChangeEstimatedProfit = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setEstimatedProfit(e.target.value)
+        setState((prev) => ({...prev, estimatedProfit: Number(e.target.value)}))
     }, [])
+
 
     return (
         <form>
@@ -49,7 +86,7 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             className={cls.input}
                             placeholder="Укажите название"
                             type='text'
-                            value={rowName}
+                            value={state?.rowName}
                             onChange={onChangeRowName}
                             onKeyPress={createRowInEntity}
                         />
@@ -59,7 +96,7 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             className={cls.input}
                             placeholder="0"
                             type='number'
-                            value={salary}
+                            value={state?.salary}
                             onChange={onChangeSalary}
                             onKeyPress={createRowInEntity}
                         />
@@ -69,7 +106,7 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             className={cls.input}
                             placeholder="0"
                             type='number'
-                            value={equipmentCosts}
+                            value={state?.equipmentCosts}
                             onChange={onChangeEquipmentCosts}
                             onKeyPress={createRowInEntity}
                         />
@@ -79,7 +116,7 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             className={cls.input}
                             placeholder="0"
                             type='number'
-                            value={overheads}
+                            value={state?.overheads}
                             onChange={onChangeOverheads}
                             onKeyPress={createRowInEntity}
                         />
@@ -89,7 +126,7 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             className={cls.input}
                             placeholder="0"
                             type='number'
-                            value={estimatedProfit}
+                            value={state?.estimatedProfit}
                             onChange={onChangeEstimatedProfit}
                             onKeyPress={createRowInEntity}
                         />
