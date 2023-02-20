@@ -2,6 +2,9 @@ import React from 'react';
 import cls from './AddNewRow.module.scss'
 import {useSelector} from "react-redux";
 import {getNewRowData} from "../model/selectors/getNewRowData";
+import {useAppDispatch} from "../../../app/storeProvider/store";
+import { addRowActions } from '../model/slices/addNewRowSlice';
+import {NewRowProps} from "../model/types/addRowData";
 
 interface AddNewTodoProps {
     createRowInEntity?: () => void
@@ -13,10 +16,12 @@ const AddNewRow = (props: AddNewTodoProps) => {
         createRowInEntity
     } = props
 
+    const dispatch = useAppDispatch()
+
     const data = useSelector(getNewRowData)
 
-    const [state, setState] = React.useState(data)
-
+    const [state, setState] = React.useState<NewRowProps>(data)
+    console.log(state)
     // const [rowName, setRowName] = React.useState('')
     // const onChangeRowName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     //     setRowName(e.target.value)
@@ -35,8 +40,10 @@ const AddNewRow = (props: AddNewTodoProps) => {
 
 
     const onChangeSalary = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setState((prev) => ({...prev, salary: Number(e.target.value)}))
+        // setState((prev) => ({...prev, salary: e.target.value}))
+        // dispatch(addRowActions.setSalary(e.target.value))
     }, [])
+
 
 
     // const [equipmentCosts, setEquipmentCosts] = React.useState('0')
@@ -97,7 +104,7 @@ const AddNewRow = (props: AddNewTodoProps) => {
                             placeholder="0"
                             type='number'
                             value={state?.salary}
-                            onChange={onChangeSalary}
+                            onBlur={onChangeSalary}
                             onKeyPress={createRowInEntity}
                         />
                     </td>
@@ -135,7 +142,6 @@ const AddNewRow = (props: AddNewTodoProps) => {
 
 
 
-                    //test
                     <td className={cls.column}>
                         <input
                             className={cls.input}

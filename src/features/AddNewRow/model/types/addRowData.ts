@@ -1,6 +1,6 @@
 export interface NewRowProps {
     rowName?: string
-    salary?: number
+    salary?: number | string
     equipmentCosts?: number
     overheads?: number
     estimatedProfit?: number

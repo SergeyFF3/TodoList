@@ -13,7 +13,7 @@ const initialState: rowSchema = {
         overheads: 0,
         parentId: 0,
         rowName: "",
-        salary: 0,
+        salary: "0",
         supportCosts: 0
     }
 
@@ -21,14 +21,18 @@ const initialState: rowSchema = {
     export const addRowSlice = createSlice({
     name: 'addRow',
     initialState,
-    reducers: {},
-    extraReducers: builder => {
-        builder
-        .addCase(addNewRow.fulfilled, (state, action: PayloadAction<NewRowProps>) => {
-            state.data = action.payload
-        })
-
-    }
+    reducers: {
+        setSalary(state, action: PayloadAction<string>) {
+            state.data.salary = action.payload
+        }
+    },
+    // extraReducers: builder => {
+    //     builder
+    //     .addCase(addNewRow.fulfilled, (state, action: PayloadAction<NewRowProps>) => {
+    //         state.data = action.payload
+    //     })
+    //
+    // }
 })
 
 export const { reducer: addRowReducer } = addRowSlice
